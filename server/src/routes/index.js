@@ -10,6 +10,6 @@ router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 
 // User Routes
-router.get('/profile', authMiddleware, userController.getProfile);
+router.get('/profile/:id', authMiddleware, userController.getProfile);
 
 module.exports = router;

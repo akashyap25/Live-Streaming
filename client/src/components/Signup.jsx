@@ -2,6 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import swal from 'sweetalert2';
+import { BACKEND_URL } from '../constans';
+
 
 const Signup = () => {
   const validationSchema = Yup.object({
@@ -14,12 +17,20 @@ const Signup = () => {
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      await axios.post('http://localhost:5000/api/signup', values);
-      alert('User created successfully');
+      await axios.post(`${BACKEND_URL}/api/signup`, values);
+      swal.fire({
+        icon: 'success',
+        title: 'Signup successful',
+        text: 'You have successfully signed up',
+      });
       resetForm();
     } catch (error) {
       console.error('Error signing up', error);
-      alert('Error signing up. Please try again.');
+      swal.fire({
+        icon: 'error',
+        title: 'Error signing up',
+        text: error.response.data.error,
+      });
     } finally {
       setSubmitting(false);
     }

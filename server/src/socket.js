@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
     logger.info('Received stream data');
 
     // Uncomment the following line to log the data in console
-    //logger.info('Received stream data',data);
+    // logger.info('Received stream data',data);
 
     socket.emit('status', 'Stream data received');
   });

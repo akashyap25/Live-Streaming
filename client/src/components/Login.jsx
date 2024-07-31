@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { BACKEND_URL } from '../constans';
 
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState('');
@@ -8,10 +10,15 @@ const Login = ({ setToken }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/login', { username, password });
+      const response = await axios.post(`${BACKEND_URL}/api/login`, { username, password });
       setToken(response.data.token);
     } catch (error) {
       console.error('Error logging in', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error logging in',
+        text: error.response.data.error,
+      });
     }
   };
 
@@ -43,6 +50,9 @@ const Login = ({ setToken }) => {
           placeholder="Password"
           className="input"
         />
+      </div>
+      <div className="mb-6">
+        <a href="#" className="text-blue-500 hover:underline">Forgot your password?</a>
       </div>
       <div className="flex items-center justify-between">
         <button 

@@ -18,6 +18,7 @@ exports.signup = async (req, res) => {
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
+      authLogger.warn('Email is already registered', { email });
       return res.status(400).json({ error: 'Email is already registered' });
     }
 
@@ -46,7 +47,7 @@ exports.login = async (req, res) => {
     }
 
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
     authLogger.info('User logged in successfully', { username: user.username });
     res.json({ token });
   } catch (error) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {jwtDecode} from 'jwt-decode'; 
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Stream from './components/Stream';
@@ -6,14 +7,23 @@ import Stream from './components/Stream';
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [showLogin, setShowLogin] = useState(true);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     if (token) {
       localStorage.setItem('token', token);
+      try {
+        const decodedToken = jwtDecode(token);
+        setUserId(decodedToken.userId); 
+      } catch (error) {
+        console.error('Failed to decode token:', error);
+      }
     } else {
       localStorage.removeItem('token');
+      setUserId(null);
     }
   }, [token]);
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -46,7 +56,7 @@ const App = () => {
           </div>
         )
       ) : (
-        <Stream token={token} setToken={setToken} />
+        <Stream token={token} setToken={setToken} userId={userId} />
       )}
     </div>
   );
