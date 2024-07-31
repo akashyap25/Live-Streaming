@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { BACKEND_URL } from '../constans';
+import { BACKEND_URL } from '../constant';
 
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState('');

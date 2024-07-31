@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import swal from 'sweetalert2';
-import { BACKEND_URL } from '../constans';
+import { BACKEND_URL } from '../constant';
 
 
 const Signup = () => {

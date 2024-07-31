@@ -1,18 +1,18 @@
 version: '3'
 services:
   backend:
-    build: ./backend
+    build: ./server
     ports:
       - "5000:5000"
     environment:
       MONGO_URI: mongodb+srv://anuragkashyap026:lk3PTmfRg7VXgQYD@cluster0.vbx1hba.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-    depends_on:
-      - mongo
+      JWT_SECRET: jsdfhsdnnu1234jdf
+    volumes:
+      - ./server:/usr/src/app # Ensures changes in the server code are reflected in the container
+
   frontend:
-    build: ./frontend
+    build: ./client
     ports:
       - "5173:5173"
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
+    volumes:
+      - ./client:/usr/src/app # Ensures changes in the client code are reflected in the container

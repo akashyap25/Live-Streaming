@@ -1,9 +1,9 @@
-const { app, server } = require('./socket'); // Import the WebSocket server setup
+const { app, server } = require('./src/socket'); // Import the WebSocket server setup
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const logger = require('./logger'); // Import the Winston logger
+const logger = require('./src/logger'); // Import the Winston logger
 dotenv.config();
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -25,7 +25,7 @@ mongoose.connect(MONGO_URI)
     logger.error('Error connecting to MongoDB:', err);
   });
 
-const routes = require('./routes');
+const routes = require('./src/routes');
 app.use('/api', routes);
 
 // Error handling middleware

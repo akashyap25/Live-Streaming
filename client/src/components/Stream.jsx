@@ -5,7 +5,7 @@ import { FaPlay, FaStop, FaUsers, FaSmile } from 'react-icons/fa';
 import { BsDot } from 'react-icons/bs';
 import EmojiPicker from 'emoji-picker-react';
 import axios from 'axios';
-import { BACKEND_URL } from '../constans';
+import { BACKEND_URL } from '../constant';
 
 const Stream = ({ token, setToken, userId }) => {
   const videoRef = useRef(null);
